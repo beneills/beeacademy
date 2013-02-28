@@ -11,4 +11,10 @@ Setup: Make sure you've got BeautifulSoup installed and that you've set up a cus
 
 3. Make a cron job to run beeacad.py once a day (or however often you'd like) to update your graph with your current total of achievements from codeacademy.
 
- 
+
+TODO
+====
+
+* Add commandline paramaters to script
+
+* Use ConfigParser
