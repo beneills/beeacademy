@@ -5,7 +5,7 @@ Scrapes achievements from Code Academy and updates beeminder graph (uses python 
 
 Setup: Make sure you've got BeautifulSoup installed and that you've set up a custom beeminder graph #you're going to want it custom so you can change the graph to not auto sum.
 
-1. Create a settings file (settings.py)
+1. Create a settings file (settings.py) via *cp settings.py.readme settings.py; $EDITOR settings.py*
 
 2. Put in local env variables: 
 
