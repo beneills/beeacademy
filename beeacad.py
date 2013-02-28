@@ -39,5 +39,9 @@ beeapi = beeminderpy.Beeminder(settings.BEEMINDER_AUTH_TOKEN)
 timestamp = time.time()
 
 # Create datapoint
-beeapi.create_datapoint(settings.BEEMINDER_USERNAME,settings.BEEMINDER_GRAPH,timestamp,numCodeAcademy,'CodeAcademy Achievements','true')
-print "Created Datapoint"
+result = beeapi.create_datapoint(settings.BEEMINDER_USERNAME,settings.BEEMINDER_GRAPH,timestamp,numCodeAcademy,'CodeAcademy Achievements','true')
+
+if result:
+    print "Success: Created datapoint"
+else:
+    print "Error: create_datapoint returned False"
