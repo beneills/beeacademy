@@ -18,7 +18,11 @@ import settings
 
 # Open user's CodeAcademy Profile
 url = settings.CODEACADEMY_PROFILE
-response = urllib2.urlopen(url)
+
+try:
+    response = urllib2.urlopen(url)
+except URLError:
+    exit("Error: Cannot open URL {0}".format(url))
 webContent = response.read()
 
 # Read the response into BeautifulSoup
@@ -26,6 +30,8 @@ soup = BeautifulSoup(webContent)
 
 # Finds the User Achievements part of the profile page (there's probably a more elegant way to write this)
 achiev = soup.find("div", {"id": "userAchievements"})
+if not achiev:
+    exit("Error: Failed to extract number of achivements from HTML")
 strong = achiev.em
 
 # Removes the parantheses and gives number of achievements
@@ -35,7 +41,7 @@ numCodeAcademy = int(numCode)
 # Use beeminderpy wrapper to authenticate API
 beeapi = beeminderpy.Beeminder(settings.BEEMINDER_AUTH_TOKEN)
 
-# Get timestamp
+# Use current time for datapoint
 timestamp = time.time()
 
 # Create datapoint
@@ -44,4 +50,5 @@ result = beeapi.create_datapoint(settings.BEEMINDER_USERNAME,settings.BEEMINDER_
 if result:
     print "Success: Created datapoint"
 else:
-    print "Error: create_datapoint returned False"
+    exit("Error: create_datapoint returned False")
+
